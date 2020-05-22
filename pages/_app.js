@@ -1,5 +1,7 @@
 import App, { container } from 'next/app';
 
+import Page from '../components/Page';
+
 class MyApp extends Component {
     state = {  }
     render() { 
@@ -7,7 +9,11 @@ class MyApp extends Component {
         const { Component} = this.props;
         return (  
             <container>
-                <Component /> 
+                <Page>
+                <Component />
+ 
+                </Page>
+               
             </container>
         );
     }
