@@ -1,3 +1,4 @@
+import React, { Component } from 'react';
 import App, { container } from 'next/app';
 
 import Page from '../components/Page';
