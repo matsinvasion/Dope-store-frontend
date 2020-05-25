@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import App, { container } from 'next/app';
 import { ApolloProvider } from 'react-apollo';
-import withData from '../lib/withData';
+import withData from '../libs/withData';
 
 import Page from '../components/Page';
 
