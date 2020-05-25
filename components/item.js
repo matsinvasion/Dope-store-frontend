@@ -19,6 +19,14 @@ const Center = styled.div`
 text-align: center;
 `;
 
+const ItemsList = styled.div`
+display:grid;
+grid-template-columns: 1fr 1fr;
+grid-gap: 60px;
+max-width:v${props => props.theme.maxWidth};
+margin:auto;
+`;
+
 class Items extends Component {
     state = {  }
     render() { 
@@ -29,7 +37,9 @@ class Items extends Component {
                     {({data,error,loading})=>{
                         if(loading) return <p>...Loading</p>;
                     if(error) return <p> Error: {error.message}</p>;
-                    return <p>i found {data.items.length}</p>
+                    return <ItemsList>
+                        {data.items.map(item =><p>{item.title}</p> )}
+                    </ItemsList>
 
                     }}
 
