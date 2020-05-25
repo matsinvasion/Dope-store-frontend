@@ -1,52 +1,52 @@
 import React, { Component } from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import propTypes from 'prop-types';
+import Title from './styles/Title';
+import ItemStyles from './styles/ItemStyles';
+import PriceTag from './styles/PriceTag';
 import { styled } from 'styled-components';
+import { Query } from 'react-apollo';
+import formatMoney from '../libs/formatMoney';
 
-//create query, name them same thing as the variable
-const ALL_ITEMS_QUERY=gql`
-query ALL_ITEMS_QUERY{
-    items{
-        id
-        title
-        description
-        image
-        largeI  mage
+class Item extends Component {
+    static propTypes = {
+        item: propTypes.shape({
+            title:propTypes.object.isRequired
+        })
     }
-}
-`;
-const Center = styled.div`
-text-align: center;
-`;
-
-const ItemsList = styled.div`
-display:grid;
-grid-template-columns: 1fr 1fr;
-grid-gap: 60px;
-max-width:v${props => props.theme.maxWidth};
-margin:auto;
-`;
-
-class Items extends Component {
     state = {  }
     render() { 
+        const { item } = this.props; 
         return ( 
-            <Center>
-                <p>Items!</p>
-                <Query query={ALL_ITEMS_QUERY }>
-                    {({data,error,loading})=>{
-                        if(loading) return <p>...Loading</p>;
-                    if(error) return <p> Error: {error.message}</p>;
-                    return <ItemsList>
-                        {data.items.map(item =><p>{item.title}</p> )}
-                    </ItemsList>
+            <ItemStyles>
+                {item.image && <img src={item.image} alt={item.title}/>}
+                <Title> 
+                    <Link href={{
+                        pathname:'/item',
+                        query:{id: item.id},
+                    }}>
+                    <a>
+                    {item.title}
+                    </a>
+                </Link> 
+                </Title>
+                <PriceTag>
+                     {formatMoney(item.price)}
+                </PriceTag>
+                <p> {item.description}</p>
 
-                    }}
-
-                </Query>
-            </Center>
+                <div className="buttonList">
+                    <Link href={{
+                        pathname:"update",
+                        query:{id:item.id}
+                    }}>
+                    <a> Edit </a>
+                    </Link>
+                    <button>Add To Cart</button>
+                    <button>Delete </button>
+                </div>
+            </ItemStyles>
          );
     }
 }
  
-export default Items;
+export default Item;
