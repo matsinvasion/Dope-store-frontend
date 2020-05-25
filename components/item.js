@@ -25,7 +25,7 @@ class Items extends Component {
                 <Query query={ALL_ITEMS_QUERY }>
                     {({data,error,loading})=>{
                         if(loading) return <p>...Loading</p>;
-                    if(errror) return <p> Error: {error.message}</p>;
+                    if(error) return <p> Error: {error.message}</p>;
                     return <p>i found {data.items.length}</p>
 
                     }}
