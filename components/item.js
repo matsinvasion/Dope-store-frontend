@@ -6,8 +6,9 @@ import PriceTag from './styles/PriceTag';
 import  styled  from 'styled-components';
 import { Query } from 'react-apollo';
 import formatMoney from '../libs/formatMoney';
-import Link from 'next/link';
+import Link from 'next/link'; 
 import DeleteItem from './DeleteItem';
+import AddToCart from './AddToCart';
 
 class Item extends Component {
     static propTypes = {
@@ -43,7 +44,7 @@ class Item extends Component {
                     }}>
                     <a> Edit </a>
                     </Link>
-                    <button>Add To Cart</button>
+                   <AddToCart />
                     <DeleteItem id={item.id}>Delete Item</DeleteItem>
                 </div>
             </ItemStyles>
