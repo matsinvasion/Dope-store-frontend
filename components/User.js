@@ -10,6 +10,17 @@ query {
         email
         name
         permissions
+        cart {
+            id
+            quantity 
+            item {
+                id
+                price
+                image
+                title
+                description
+              }
+        }
    }
 }
 `;
@@ -25,5 +36,5 @@ User.propTypes = {
   };
 export default User;
 
-//export default User;
+
 export { CURRENT_USER_QUERY };

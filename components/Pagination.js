@@ -16,17 +16,16 @@ query PAGINATION_QUERY {
 }
 `;
 
-const Pagination = () => {
+const Pagination = (props) => {
     return ( 
-
         <Query query={PAGINATION_QUERY}>
-            {({data,loading,error,}) =>{
+            {({data,loading,error}) =>{
                 if (loading) return <p>Loadding ...</p>
                 const count = data.itemsConnection.aggregate.count;
                 const pages = Math.ceil(count /perPage);
                 const page = props.page; 
                 
-                    return <PaginationStyles>
+                    return (<PaginationStyles>
                         <Link prefetch href={{
                             pathname:"items",
                             query: {page:page-1}
@@ -43,7 +42,7 @@ const Pagination = () => {
                         }}>
                             <a className="prev" aria-disabled={page >= pages}> Next</a>
                         </Link>
-                </PaginationStyles>
+                </PaginationStyles>)
                 
             }}
             

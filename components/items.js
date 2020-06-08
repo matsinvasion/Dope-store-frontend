@@ -9,7 +9,7 @@ import Pagination from './Pagination';
 //create query, name them same thing as the variable
 const ALL_ITEMS_QUERY=gql`
 query ALL_ITEMS_QUERY($skip: Int =0, $first: Int=${perPage}){
-    items(first:$first, skip:$skip, orderBy: createdAt_Desc){
+    items(first:$first, skip:$skip){
         id
         title
         description
@@ -37,13 +37,10 @@ class Items extends Component {
             <Center>
                 <Pagination page={this.props.page}/>
                 <p>Items!</p>
-                <Query query={ALL_ITEMS_QUERY } variables={{
-                    skip:this.props.page * perPage - perPage,
-                   
-                }}>
+                <Query query={ALL_ITEMS_QUERY}  variables={{skip:this.props.page * perPage - perPage}}>
                     {({data,error,loading})=>{
-                        if(loading) return <p>...Loading</p>;
-                    if(error) return <p> Error: {error.message}</p>;
+                        if (loading) return <p>...Loading</p>;
+                    if (error) return <p> Error: {error.message}</p>;
                     return <ItemsList>
                         {data.items.map(item =><Item item={item} key={item.id}>{item.title}</Item> )}
                     </ItemsList>
