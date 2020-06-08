@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Items from '../components/items';
-import { Query } from 'react-apollo';
-const Home = () => {
+
+const Home = (props) => {
     return ( 
         <div>
             <Items page={parseFloat(props.query.page) || 1} />
